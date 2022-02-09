@@ -1,10 +1,12 @@
 (() => {
 	// make the connections to the elements on the page
 	// that we want the user to interact with
-	const theButtons = document.querySelectorAll("#buttonHolder img"),
+	let theButtons = document.querySelectorAll("#buttonHolder img"),
 				puzzlePieces = document.querySelectorAll(".puzzle-pieces *"),
 				dropZones = document.querySelectorAll(".drop-zone"),
 				theGameBoard = document.querySelector(".puzzle-board");
+
+	const piecePaths = ["topLeft", "topRight", "bottomLeft", "bottomRight"];
 
 	// theButtons becomes thisL
 	// [
@@ -14,13 +16,17 @@
 	// <img>
 	// ]
 
-	function changeBgImg() {
+	function changeImageSet() {
 		// debugger; // payse our code execution at this point
 		// let key = this.dataset.bgref;
 		// console.log(key);
 
 		// theGameBoard.style.backgroundImage = `url(images/backGround${key}.jpg)`;
 			 theGameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`;
+
+			 piecePaths.forEach ((piece, index) => {
+				 puzzlePieces[index].src = `images/${piece + this.dataset.bgref}.jpg `
+			 })
 
 			 // `` => this is a javascript template string. You can use it to write a bit of
 			 // inline javascrip which will be intepreted at runtime
@@ -54,7 +60,7 @@
 	}
 
 	// these are the "triggers" wwe want the user to use to fire off event
-	theButtons.forEach(button => button.addEventListener("click", changeBgImg));
+	theButtons.forEach(button => button.addEventListener("click", changeImageSet));
 	puzzlePieces.forEach(piece => piece.addEventListener("dragstart", startDrag));
 	dropZones.forEach(zone => {
 		zone.addEventListener("dragover", draggedOver);
