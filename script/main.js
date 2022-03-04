@@ -2,9 +2,10 @@
 	// make the connections to the elements on the page
 	// that we want the user to interact with
 	let theButtons = document.querySelectorAll("#buttonHolder img"),
-				puzzlePieces = document.querySelectorAll(".puzzle-pieces *"),
-				dropZones = document.querySelectorAll(".drop-zone"),
-				theGameBoard = document.querySelector(".puzzle-board");
+			puzzlePieces = document.querySelectorAll(".puzzle-pieces *"),
+			dropZones = document.querySelectorAll(".drop-zone"),
+			theGameBoard = document.querySelector(".puzzle-board"),
+			thePuzzleBoard = document.querySelector(".puzzle-pieces");
 
 	const piecePaths = ["topLeft", "topRight", "bottomLeft", "bottomRight"];
 
@@ -20,6 +21,14 @@
 		// debugger; // payse our code execution at this point
 		// let key = this.dataset.bgref;
 		// console.log(key);
+
+		dropZones.forEach(zone =>{
+			console.log("before remove ", zone.firstChild)
+			while (zone.firstChild) {
+				thePuzzleBoard.appendChild(zone.firstChild);
+				console.log("after remove", zone.firstChild);
+			}
+		});
 
 		// theGameBoard.style.backgroundImage = `url(images/backGround${key}.jpg)`;
 			 theGameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`;
